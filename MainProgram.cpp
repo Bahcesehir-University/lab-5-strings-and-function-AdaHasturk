@@ -190,7 +190,7 @@ int MyString::count(char ch) const {
     // TODO: Return the number of occurrences of character ch in the string
     int cnt = 0;
     for (char c : data){
-        if ( c = ch ) cnt++;
+        if ( c == ch ) cnt++;
     }
     return cnt;
 }
