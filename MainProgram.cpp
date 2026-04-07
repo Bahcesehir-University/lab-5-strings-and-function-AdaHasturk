@@ -82,17 +82,20 @@ public:
 
 // ---- Constructors ----
 
-MyString::MyString() : data(str) {
+MyString::MyString() {
     // TODO: Initialize with empty string
+    data="";
     
 }
 
-MyString::MyString(const string& str) : data(str) {
+MyString::MyString(const string& str) {
     // TODO: Initialize data with the given std::string
+    data = str;
 }
 
-MyString::MyString(const char* str) : data(str) {
+MyString::MyString(const char* str) {
     // TODO: Initialize data with the given C-string
+    data = str;
     
 }
 
@@ -113,10 +116,11 @@ int MyString::length() const {
 char MyString::charAt(int index) const {
     // TODO: Return character at given index
     // Throw std::out_of_range if index is invalid (negative or >= length)
-    if (index < 0 || index >= static_cast<int>(data.length()))
+    if (index < 0 || index >= static_cast<int>(data.length())){
     throw out_of_range("Index out of range in charAt");
+    }
+    return data[index];
 }
-return data[index];
 
 MyString MyString::substring(int start, int len) const {
     // TODO: Return a substring starting at 'start' with length 'len'
@@ -137,8 +141,7 @@ MyString MyString::toUpperCase() const {
     // Do NOT modify the original object
     string result = data ;
     transform(result.begin() , result.end() , result.begin() , [] (unsigned char c) {
-        return toupper(c);
-    })
+        return toupper(c);});
     return MyString(result);
 }
 
@@ -148,8 +151,7 @@ MyString MyString::toLowerCase() const {
     // Do NOT modify the original object
     string result = data ;
     transform(result.begin() , result.end() , result.begin() , [] (unsigned char c) {
-        return tolower(c);
-    })
+        return tolower(c);});
     return MyString(result);
 }
 
@@ -160,7 +162,7 @@ MyString MyString::trim() const {
     size_t start = data.find_first_not_of(" \t\n\r");
     if (start == string::npos) return MyString(" ");
     size_t end = data.find_last_not_of(" \t\n\r");
-    return MyString(data.substr(start, end - start + 1));
+    return MyString(data.substr(start, end-start + 1));
 }
 
 MyString MyString::reverse() const {
@@ -186,7 +188,7 @@ int MyString::count(char ch) const {
     // TODO: Return the number of occurrences of character ch in the string
     int cnt = 0;
     for (char c : data){
-        if ( c = ch ) cnt++;
+        if ( c == ch ) cnt++;
     }
     return cnt;
 }
@@ -237,7 +239,7 @@ MyString MyString::replace(const string& oldStr, const string& newStr) const {
     string result = data;
     size_t pos = 0;
     while((pos = result.find(oldStr,pos)) != string::npos){
-        result.replace(pos,oldStr,length() , newStr);
+        result.replace(pos,oldStr.length() , newStr);
         pos += newStr.length();
     }
     return MyString(result);
